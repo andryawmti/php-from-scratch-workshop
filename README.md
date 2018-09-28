@@ -248,3 +248,28 @@ If you haven't completed the above steps, you can checkout **step-4** to not be 
 ~~~bash
 git checkout step-4
 ~~~
+
+## Routing
+
+Let's implement routing and transform URIs like http://workshop.local/account.php?account=Obi-Wan into http://workshop.local/Obi-Wan
+
+For this, let's use Apache's `mod_rewrite` and update the Apache configuration:
+~~~apacheconfig
+RewriteEngine on
+
+# http://workshop.local/username
+RewriteCond %{REQUEST_METHOD} =GET
+RewriteRule ^/([^/]+)$ /account.php?username=$1 [L]
+
+# http://workshop.local/
+RewriteCond %{REQUEST_METHOD} =GET
+RewriteRule ^/$ /index.php [L]
+~~~
+
+The `Homepage` template needs updating after Apache has been restarted.
+
+If you haven't completed the above steps, you can checkout **step-5** to not be late:
+
+~~~bash
+git checkout step-5
+~~~
