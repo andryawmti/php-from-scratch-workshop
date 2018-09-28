@@ -8,13 +8,16 @@ use Workshop\Entity\Tweet;
 class TweetRepository
 {
     /**
-     * @var string
+     * @var array<string,array{name:string,tweets:array{ts:string,tweet:string}}>
      */
-    private $dataFile;
+    private $data;
 
-    public function __construct()
+    /**
+     * @param array<string,array{name:string,tweets:array{ts:string,tweet:string}}> $data
+     */
+    public function __construct(array $data)
     {
-        $this->dataFile = __DIR__ . "/../../../data/tweets.php";
+        $this->data = $data;
     }
 
     /**
@@ -24,7 +27,7 @@ class TweetRepository
     {
         $tweets = [];
 
-        foreach ((require $this->dataFile)[$username]["tweets"] as $tweet) {
+        foreach ($this->data[$username]["tweets"] as $tweet) {
             $tweets[] = new Tweet($tweet["tweet"], new DateTime($tweet["ts"]));
         }
 

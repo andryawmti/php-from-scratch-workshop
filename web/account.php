@@ -1,7 +1,7 @@
 <?php
 $username = $_GET["username"];
-$name = (new Workshop\Repository\AccountRepository())->getByUsername($username)->name;
-$tweets = (new Workshop\Repository\TweetRepository())->listTweets($username);
+$name = Workshop\DI::getAccountRepository()->getByUsername($username)->name;
+$tweets = Workshop\DI::getTweetRepository()->listTweets($username);
 ?>
 <!DOCTYPE html>
 <html>

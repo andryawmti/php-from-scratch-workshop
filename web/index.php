@@ -1,5 +1,5 @@
 <?php
-$accounts = (new Workshop\Repository\AccountRepository())->listAccounts();
+$accounts = Workshop\DI::getAccountRepository()->listAccounts();
 ?>
 <!DOCTYPE html>
 <html>
