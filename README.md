@@ -273,3 +273,21 @@ If you haven't completed the above steps, you can checkout **step-5** to not be 
 ~~~bash
 git checkout step-5
 ~~~
+
+## Testing
+
+### Install PHPUnit
+
+~~~bash
+./composer.phar require --dev phpunit/phpunit
+~~~
+
+### Create the tests
+
+Implement tests to cover business logic and views.
+
+If you haven't completed the above steps, you can checkout **step-6** to not be late:
+
+~~~bash
+git checkout step-6
+~~~
