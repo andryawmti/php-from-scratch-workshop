@@ -233,3 +233,18 @@ If you haven't completed the above steps, you can checkout **step-3** to not be 
 ~~~bash
 git checkout step-3
 ~~~
+
+## Extracting templates from controllers
+
+Let's create views:
+* `Workshop\View\Layout`: Global layout of the application
+* `Workshop\View\Homepage`: Homepage view
+* `Workshop\View\Account`: Account view
+
+and refactor `web/index.php` and `web/account.php` to use them.
+
+If you haven't completed the above steps, you can checkout **step-4** to not be late:
+
+~~~bash
+git checkout step-4
+~~~
