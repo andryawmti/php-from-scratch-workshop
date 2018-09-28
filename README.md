@@ -156,3 +156,61 @@ If you haven't completed the above steps, you can checkout **step-1** to not be 
 ~~~bash
 git checkout step-1
 ~~~
+
+## Managing dependencies
+
+We won't reinvent the wheel, let's grab [composer](https://getcomposer.org/) to manage our dependencies:
+~~~bash
+wget https://getcomposer.org/download/1.7.2/composer.phar
+chmod a+x composer.phar
+~~~
+Create a `composer.json` file:
+~~~json
+{
+    "name": "php/workshop",
+    "autoload": {
+        "psr-0": { "": "src/" }
+    }
+}
+~~~
+Let's add some coding standard & Phan
+~~~bash
+./composer.phar require --dev slevomat/coding-standard phan/phan
+~~~
+
+To run the tools
+* Discovering coding standard issues: `vendor/bin/phpcs --standard=phpcs.xml .`
+* Resolve (some) coding standard issues automatically: `vendor/bin/phpcbf --standard=phpcs.xml .`
+* Perform Phan static analysis: `vendor/bin/phan --color`
+
+## Configure the bootstrapping of the application
+
+Create `bootstrap.php` at the root of your project:
+~~~php
+<?php
+
+require "vendor/autoload.php";
+~~~
+
+Tell PHP to load if for every requests in Apache's `VirtualHost` config:
+~~~apacheconfig
+php_admin_value auto_prepend_file "/path/to/workshop/bootstrap.php"
+~~~
+
+## Separating business logic from template
+
+### Creation of the business logic classes:
+
+* `Workshop\Repository\AccountRepository` (`src/Workshop/Repository/AccountRepository.php`)
+  * `listAccounts(): array` Gives a list of name and username of all existing accounts, to be used for *Homepage*.
+  * `getNameByUsername(string $username): string` Gives the name of an account, given its `$username`, to be used for *Account page*.
+* `Workshop\Repository\TweetRepository` (`src/Workshop/Repository/TweetRepository.php`)
+  * `listTweets(string $username): array` Gives all the tweets of an account, given its `$username`, to be used for *Account page*.
+
+Refactor `web/index.php` and `web/account.php` to use it.
+
+If you haven't completed the above steps, you can checkout **step-2** to not be late:
+
+~~~bash
+git checkout step-2
+~~~
