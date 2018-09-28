@@ -25,7 +25,7 @@ class Homepage
         <ul>
             <?php foreach ($this->accounts as $account) : ?>
                 <li>
-                    <a href="account.php?username=<?= \htmlentities($account->username)?>">
+                    <a href="<?= \htmlentities($account->username)?>">
                         <?= \htmlentities($account->name) ?>
                     </a>
                 </li>
