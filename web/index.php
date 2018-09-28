@@ -1,3 +1,6 @@
+<?php
+$accounts = (new Workshop\Repository\AccountRepository())->listAccounts();
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,10 +10,10 @@
 <body>
 <h1>Twitter homepage</h1>
 <ul>
-    <?php foreach (require "../data/tweets.php" as $account => $data): ?>
+    <?php foreach ($accounts as $account) : ?>
     <li>
-        <a href="account.php?username=<?= htmlentities($account)?>">
-            <?= htmlentities($data["name"]) ?>
+        <a href="account.php?username=<?= htmlentities($account->username)?>">
+            <?= htmlentities($account->name) ?>
         </a>
     </li>
     <?php endforeach ?>

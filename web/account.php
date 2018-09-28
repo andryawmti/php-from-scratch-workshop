@@ -1,18 +1,19 @@
 <?php
-$account = $_GET["username"];
-$data = (require "../data/tweets.php")[$account];
+$username = $_GET["username"];
+$name = (new Workshop\Repository\AccountRepository())->getByUsername($username)->name;
+$tweets = (new Workshop\Repository\TweetRepository())->listTweets($username);
 ?>
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Tweets from <?= htmlentities($data["name"])?> - @<?= htmlentities($account) ?></title>
+    <title>Tweets from <?= htmlentities($name)?> - @<?= htmlentities($username) ?></title>
 </head>
 
 <body>
-<h1>Tweets from <?= htmlentities($data["name"])?> - @<?= htmlentities($account) ?></h1>
+<h1>Tweets from <?= htmlentities($name)?> - @<?= htmlentities($username) ?></h1>
 <ul>
-    <?php foreach ($data["tweets"] as $tweet) : ?>
-    <li><?= htmlentities($tweet["tweet"]) ?> <span class="date">(<?= $tweet["ts"] ?>)</span></li>
+    <?php foreach ($tweets as $tweet) : ?>
+    <li><?= htmlentities($tweet->text) ?> <span class="date">(<?= $tweet->ts->format("Y-m-d H:i:s") ?>)</span></li>
     <?php endforeach ?>
 </ul>
 </body>
