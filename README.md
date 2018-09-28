@@ -214,3 +214,22 @@ If you haven't completed the above steps, you can checkout **step-2** to not be 
 ~~~bash
 git checkout step-2
 ~~~
+
+## Dependency Injection
+
+
+Create `Workshop\DI` class with the following static methods:
+* Returns the "database" data:
+  * `private static function getData(): array`
+* Returns a configured `AccountRepository`:
+  * `public static function getAccountRepository(): AccountRepository`
+* Returns a configured `TweetRepository`:
+  * `public static function getTweetRepository(): TweetRepository`
+
+and refactor `web/index.php` and `web/account.php`.
+
+If you haven't completed the above steps, you can checkout **step-3** to not be late:
+
+~~~bash
+git checkout step-3
+~~~
